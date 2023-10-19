@@ -1,0 +1,17 @@
+version : "3.8"
+
+services:
+  fapi :
+    image : "python:3.11-alpine"
+    ports :
+      - "8000:8000"
+    volumes :
+      - /Users/pn_jh/Desktop/fastapi_template:/code
+    tty : true
+  db:
+    image: postgres
+    restart: always
+    ports :
+      - "8080:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
