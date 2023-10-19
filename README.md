@@ -1,2 +1,8 @@
 # chatbot-project
-gpt,fastapi,vue-js
+
+
+Backend : Fastapi
+frontend : Vuejs3
+AI : chatgpt
+
+
