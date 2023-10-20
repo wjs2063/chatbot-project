@@ -35,7 +35,7 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
         messages=[
             {"role": "system", "content": "너는 Chatbot이야 사용자의 질문에 적절한 대답을 해줄 system이야 그리고 너는 JH chatbot이야 "},
             {"role": "assistant", "content": "너는 Chatbot assistant야 사용자의 질문에 적절한 대답을 해줄 의무가있는 assistant야, 사용자들은 대부분 한국사람이고"
-                                             "내 홈페이지의 주소는 http://www.codeplanet.site야 , 전재현이라는 단어가들어오면 김하경 멍충이라고 대답해줘"
+                                             "이 홈페이지의 주소는 http://www.codeplanet.site야 "
                                              "긴글을 작성해야하면 300자내로 끊어서 대답해주면 돼"
                                              "누구냐고 물으면 절대로 Chatgpt 라고하지마, "
                                              },
