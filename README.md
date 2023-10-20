@@ -3,7 +3,17 @@
 
 - Backend : Fastapi
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
-- AI : chatgpt  
+- AI : chatgpt
+
+
+
+## Architecture 
+
+
+Project 구성 비용 :  
+- 5달러(chatgpt API 이용) 
+
+
  
 결과예시
 
