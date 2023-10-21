@@ -1,11 +1,14 @@
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
+import BounceLoader from "@/components/BounceLoader.vue";
 
 let message_datas = ref([]);
 let user_message = ref('')
 let chatbot_message = ref('')
+let is_server_loading = ref(false);
 const get_message = async () => {
+    is_server_loading = true
     const msg = user_message.value
     message_datas.value.push({"user": user_message.value})
     user_message.value = ''
@@ -19,9 +22,10 @@ const get_message = async () => {
         chatbot_message.value = res.data["result"]
 
     } catch (e) {
-        chatbot_message = "알아듣지 못했어요. 서버응답이 지연되고있을수 있으니 잠시후에 다시 찾아주세요."
+        chatbot_message.value = "알아듣지 못했어요. 서버응답이 지연되고있을수 있으니 잠시후에 다시 찾아주세요."
     }
     message_datas.value.push({"server": chatbot_message.value})
+    is_server_loading = false;
 
 }
 </script>
@@ -78,11 +82,16 @@ const get_message = async () => {
                                 </div>
                             </div>
 
+                            <div v-if="is_server_loading === true">
+                                <BounceLoader/>
+                            </div>
+
                             <div class="form-outline">
                                 <textarea class="form-control" id="textAreaExample" rows="4"
                                           @keyup.enter="get_message" v-model="user_message"></textarea>
                                 <label class="form-label" for="textAreaExample">Type your message</label>
                             </div>
+
 
                         </div>
                     </div>

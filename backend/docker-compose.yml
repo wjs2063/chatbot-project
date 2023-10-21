@@ -6,7 +6,7 @@ services:
     ports :
       - "8000:8000"
     volumes :
-      - /Users/pn_jh/Desktop/fastapi_template:/code
+      - $PWD:/code
     tty : true
   db:
     image: postgres
