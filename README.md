@@ -46,7 +46,14 @@ Project 구성 비용 :
 ```
 npm install package.json
 
+//dev
 npm run serve
+
+//product
+
+npm run build
+
+serve -l [port] dist
 
 ```
 
