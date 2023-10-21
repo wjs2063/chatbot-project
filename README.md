@@ -68,3 +68,9 @@ cd /server/app
 
 uvicorn main:app --host=0.0.0.0
 ```
+
+필요시 
+
+```
+apk add gcc g++
+```
