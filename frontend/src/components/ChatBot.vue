@@ -9,7 +9,8 @@ let chatbot_message = ref('')
 let is_server_loading = ref(false);
 const get_message = async () => {
     is_server_loading = true
-    const msg = user_message.value
+    user_message.value = user_message.value.trim()
+    let msg = user_message.value
     message_datas.value.push({"user": user_message.value})
     user_message.value = ''
     let body = {
@@ -42,7 +43,7 @@ const get_message = async () => {
                             class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
                             style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                             <i class="fas fa-angle-left"></i>
-                            <p class="mb-0 fw-bold">ChatBot</p>
+                            <p class="mb-0 fw-bold">AI ChatBot</p>
                             <i class="fas fa-times"></i>
                         </div>
                         <div class="card-body">
@@ -83,7 +84,12 @@ const get_message = async () => {
                             </div>
 
                             <div v-if="is_server_loading === true">
-                                <BounceLoader/>
+                                <img
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div class="p-3 ms-3">
+                                    <BounceLoader />
+                                </div>
                             </div>
 
                             <div class="form-outline">

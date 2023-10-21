@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     _BARD_API_KEY : str = os.environ["_BARD_API_KEY"]
     _GPT_API_KEY : str = os.environ["_GPT_API_KEY"]
     POSTGRES_SCHEME : str = "postgresql+asyncpg"
-    POSTGRES_SERVER : str =  "172.19.0.2" # 사설 IP 
+    POSTGRES_SERVER : str =  "172.19.0.2" # 사설 IP
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD : str = "postgres"
     POSTGRES_DB : str = "postgres"
