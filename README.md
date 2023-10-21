@@ -1,6 +1,8 @@
 # chatbot-project
 
 
+
+
 - Backend : Fastapi
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
 - AI : chatgpt ( 프롬프트 엔지니어링 추가)
@@ -34,4 +36,35 @@ Project 구성 비용 :
 ### 결과예시
 
 
-![스크린샷 2023-10-19 234936](https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9)
+![스크린샷 2023-10-19 234936](https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9)   
+
+
+### USAGE 
+
+#### frontend
+
+```
+npm install package.json
+
+npm run serve
+
+```
+
+
+#### backend
+
+```
+docker compose up -d
+```
+
+in docker container  
+
+```
+cd /code
+
+python -m pip install -r requirements.txt
+
+cd /server/app
+
+uvicorn main:app --host=0.0.0.0
+```
