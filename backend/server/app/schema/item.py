@@ -29,14 +29,14 @@ class WitResponse():
     response : Optional[Dict] = None
     status : int = 400
 
-    def __post_init__(self):
-        try :
-            self.status = self.response.status_code
-            self.response = self.response.json()
-        except Exception as e :
-            print(e)
-            self.response = dict()
-            self.status = 400
+    # def __post_init__(self):
+    #     try :
+    #         self.status = self.response.status_code
+    #         self.response =
+    #     except Exception as e :
+    #         print(e)
+    #         self.response = dict()
+    #         self.status = 400
 
     def get_intent(self) -> Union[None,int]:
         if self.response.get('intents') is None : return None
