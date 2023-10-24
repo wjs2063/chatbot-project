@@ -37,11 +37,13 @@ async def test_redis(request:Request,msg : str,redis = Depends(get_redis)):
 async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSession = Depends(get_db),redis = Depends(get_redis)):
     # get response from witai
     wit_response = get_witai_nlu_response(chatmessage)
+   #print(wit_response.json())
     wit : WitResponse = WitResponse(response=wit_response,status=400)
     wit_intent = wit.get_intent()
     wit_confidence = wit.get_confidence()
+
     #print(f"intent : {wit_intent}, confidence : {wit_confidence}, wit_response : {wit.response}")
-    if wit.status == 200 and wit_confidence > 0.8:
+    if wit.status == 200 and wit_confidence > 0.95:
         wit_intent = wit.get_intent()
 
         # 만약 intent 가 redis 에 있다면 바로 반환 GPT 까지 갈필요 X
@@ -68,6 +70,6 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
     )
     response_str = response["choices"][0]["message"]["content"]
     response_str = re.sub("gpt | GPT | OpenAI | openai | chatgpt", "", response_str)
-    if wit_confidence > 0.8:
+    if wit_confidence > 0.95:
         await redis.set(wit_intent,response_str)
     return {"result": response_str}
