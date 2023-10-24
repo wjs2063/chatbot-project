@@ -20,10 +20,18 @@
 - Language : Javascript
 - framework : Vuejs3
 
+
+### AI 
+- WIT.AI : meta 에서 공개한 문장 의도 분석기, 대답을 빨리줄수있는 문장의 intent 에 대해서는 redis 에 캐싱하여 사용자에게 빠른 응답을 제공한다.
+- GPT : LLM 모델
+
+
 ### Architecture 
 
+![image](https://github.com/wjs2063/chatbot-project/assets/76778082/951b4fc0-327c-4d8d-b123-f469ad9e1cfa)
 
-![image](https://github.com/wjs2063/chatbot-project/assets/76778082/e6417467-ba3a-4167-8342-fc9087d42406)
+
+
 
 
 ### Cost
