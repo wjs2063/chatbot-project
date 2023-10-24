@@ -6,12 +6,13 @@
 - Backend : Fastapi
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
 - AI : chatgpt ( 프롬프트 엔지니어링 추가)
+- 2023/10/24 (redis 추가 및 WIT.AI 서버 추가)
 
 ### Backend
 - Infra : Docker
 - Language : Python
 - framework : FastAPI
-- DB : postgresql 
+- DB : postgresql,redis
 
 ### Frontend
 
