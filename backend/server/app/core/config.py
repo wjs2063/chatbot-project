@@ -15,11 +15,16 @@ class Settings(BaseSettings):
     _BARD_API_KEY : str = os.environ["_BARD_API_KEY"]
     _GPT_API_KEY : str = os.environ["_GPT_API_KEY"]
     POSTGRES_SCHEME : str = "postgresql+asyncpg"
-    POSTGRES_SERVER : str =  "172.19.0.2" # 사설 IP
+    POSTGRES_SERVER : str =  os.environ["_HOME_PUBLIC_IP"] # 공인 IP
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD : str = "postgres"
     POSTGRES_DB : str = "postgres"
-    POSTGRES_PORT : str = "5432"
+    POSTGRES_PORT : str = "8080"  # portforwarding 8080 -> 8080 -> 5432
+    REDIS_SERVER : str = os.environ["_HOME_PUBLIC_IP"] # HOME PUBLIC IP
+    REDIS_PORT : str = "6379"
+    WIT_AI_SERVER_TOKEN : str = os.getenv("_WIT_AI_SERVER_TOKEN","test")
+
+    print(POSTGRES_SERVER,REDIS_SERVER)
     ASYNC_SQLALCHEMY_DATABASE_URL: str = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@" \
         f"{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
     print(ASYNC_SQLALCHEMY_DATABASE_URL)
