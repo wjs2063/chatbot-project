@@ -27,8 +27,19 @@
 
 
 ### Architecture 
+![image](https://github.com/wjs2063/chatbot-project/assets/76778082/53e78a85-32e6-44f7-aa4a-83ce4663bd59)
 
-![image](https://github.com/wjs2063/chatbot-project/assets/76778082/951b4fc0-327c-4d8d-b123-f469ad9e1cfa)
+
+
+### 실행 로직 
+
+1. Client 발화 요청
+2. Wit.ai 에서 해당발화 특징 추출 응답
+3. 해당 발화의 특징을 가진 key 를 redis 에서 검색, ( 있다면 바로 client 에게 응답제공 threshold 이상인값만 검색함)
+4. 없다면 GPT 에게 질문
+5. 응답을 redis 에 저장 ( threshold 이상인 발화에 대해서만 진행함)
+6. 최종응답 반환
+
 
 
 
