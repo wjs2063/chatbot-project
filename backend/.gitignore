@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.env
 # add DS_Store
 .DS_Store
 # exclude venv
