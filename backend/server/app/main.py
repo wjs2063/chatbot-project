@@ -42,6 +42,4 @@ async def shutdown():
 
 @app.get("/")
 async def test():
-    return {"DB_USER": settings.DB_USER,
-            "DB_PASSWORD": settings.DB_PASSWORD
-            }
+    return "hello Welcome to fastapi"
