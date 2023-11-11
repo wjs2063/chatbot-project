@@ -14,6 +14,12 @@
 - framework : FastAPI
 - DB : postgresql,redis
 
+### API Gateway + ReverseProxy (Nginx)
+- Nginx
+- Nginx as a gateway server ( Routing)
+- 적절한 Routing 기법을 통해 해당 용도에맞는 뒷단의 서버로 요청
+- SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. (Kubernetes 를 이용한 자동 scale out) 
+
 ### Frontend
 
 - Infra : Docker
