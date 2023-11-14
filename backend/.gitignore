@@ -10,7 +10,7 @@ __pycache__/
 _venv
 # C extensions
 *.so
-
+audio_dir
 # Distribution / packaging
 .Python
 build/
