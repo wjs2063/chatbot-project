@@ -23,7 +23,7 @@ class AudioHandler:
     def __init__(self):
         pass
 
-    def download_youtube_audio_file(self,video_id):
+    def download_youtube_audio_file(self,video_id:str) -> None :
         dir_path = f"{audio_base_path}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
         if os.path.isfile(audio_file_path):return
@@ -33,7 +33,7 @@ class AudioHandler:
         yt.streams.filter(only_audio=True).first().download(filename=audio_file_path)
 
 
-    async def save_text_to_file(self,transcript, video_id):
+    async def save_text_to_file(self,transcript:str, video_id:str) -> None :
         dir_path = f"{audio_base_path}/{video_id}/"
         text_file_path = dir_path + f"{video_id}.txt"
         if is_file_exists(path=text_file_path) : return
@@ -47,19 +47,27 @@ class AudioHandler:
 class STTHandler(GPT_BASE):
     def __init__(self):
         super().__init__()
-    async def audio_to_text(self,video_id:str):
+    async def audio_to_text(self,video_id:str) -> Optional[str]:
         dir_path = f"{audio_base_path}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
-
-        if is_file_exists(audio_file_path):return
-
+        stt_file_path = dir_path + f"{video_id}.txt"
+        print("audio_file_path:",audio_file_path)
+        print("stt_file_path:",stt_file_path)
+        if is_file_exists(stt_file_path):
+            async with aiof.open(stt_file_path, "r") as fd:
+                content = await fd.read()
+            return content
         audio_file = open(audio_file_path, "rb")
         transcript = self.client.audio.transcriptions.create(
             model='whisper-1',
             file=audio_file,
             response_format='text'
         )
-
+        print(transcript)
+        # file save
+        async with aiof.open(stt_file_path, "w") as fd:
+            await fd.write(transcript)
+            await fd.flush()
         return transcript
 
 
@@ -122,10 +130,10 @@ class SummarizeHandler:
         print("audio_handler 끝")
         # audio_file 을 text 추출
         transcript = await self.stthandler.audio_to_text(video_id=video_id)
-        print("transcript 추출 완료")
+        print("transcript 추출 완료",transcript)
         # gpt 에게 요약
         content = await self.chatgpt.summarize_text(transcript)
-        print("gpt 요약 완료")
+        print("gpt 요약 완료: ",content)
         # 결과 저장후 리턴
 
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
