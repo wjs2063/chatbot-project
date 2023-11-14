@@ -15,6 +15,7 @@ import requests
 import openai
 import re
 from ArtificalIntelligence.witAI import WitAI, witai, WitResponse
+from ArtificalIntelligence.summarize import summarize_handler
 
 router = APIRouter()
 print(os.getcwd())
@@ -41,7 +42,6 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
                       redis=Depends(get_redis)):
     # get response from witai
     try:
-
         wit_response = await witai.get_response(chatmessage.messages)
         wit_response_json = await wit_response.json()
         wit: WitResponse = WitResponse(response=wit_response_json, status=wit_response.status)
@@ -79,3 +79,9 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
     except Exception as e:
         print(e)
         return {"result": "retry next time"}
+
+
+@router.post("/summarize_video")
+async def get_summarize(request : Request, video_id : str ):
+    response = await summarize_handler.get_summarize(video_id=video_id)
+    return response

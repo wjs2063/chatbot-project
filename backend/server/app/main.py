@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI,Request
 from api.api_v1.api import api_router
 from core.config import settings
@@ -31,6 +33,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
+    print("main_directory : ",os.getcwd())
     print("fastapi-server started!!")
     await create_tables(engine=engine, metadata=metadata)
     print("postgresql-tables created!!")
