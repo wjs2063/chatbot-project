@@ -42,7 +42,6 @@ class AudioHandler:
         async with aiof.open(file = text_file_path, mode = 'w') as fd:
             await fd.write(transcript)
             await fd.flush()
-        print(f"audio to {video_id}.txt is done")
 
 class STTHandler(GPT_BASE):
     def __init__(self):
@@ -51,8 +50,6 @@ class STTHandler(GPT_BASE):
         dir_path = f"{audio_base_path}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
         stt_file_path = dir_path + f"{video_id}.txt"
-        print("audio_file_path:",audio_file_path)
-        print("stt_file_path:",stt_file_path)
         if is_file_exists(stt_file_path):
             async with aiof.open(stt_file_path, "r") as fd:
                 content = await fd.read()
@@ -63,7 +60,6 @@ class STTHandler(GPT_BASE):
             file=audio_file,
             response_format='text'
         )
-        print(transcript)
         # file save
         async with aiof.open(stt_file_path, "w") as fd:
             await fd.write(transcript)
@@ -80,7 +76,6 @@ class STTHandler(GPT_BASE):
         async with aiof.open(file = summarize_file_path, mode = 'w') as fd:
             await fd.write(transcript)
             await fd.flush()
-        print(f"audio to {video_id}.txt is saved")
 
 class ChatGPT(GPT_BASE):
     def __init__(self):
@@ -127,20 +122,16 @@ class SummarizeHandler:
 
         # youtube_id 로 부터 audio_file 생성
         self.audiohandler.download_youtube_audio_file(video_id=video_id)
-        print("audio_handler 끝")
         # audio_file 을 text 추출
         transcript = await self.stthandler.audio_to_text(video_id=video_id)
-        print("transcript 추출 완료",transcript)
         # gpt 에게 요약
         content = await self.chatgpt.summarize_text(transcript)
-        print("gpt 요약 완료: ",content)
         # 결과 저장후 리턴
 
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
         async with aiof.open(summarize_file_path, "w") as fd:
             await fd.write(content)
             await fd.flush()
-        print("파일저장 완료")
 
         return {"content" : content}
 

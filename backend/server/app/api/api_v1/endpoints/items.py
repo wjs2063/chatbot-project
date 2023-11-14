@@ -18,7 +18,6 @@ from ArtificalIntelligence.witAI import WitAI, witai, WitResponse
 from ArtificalIntelligence.summarize import summarize_handler
 
 router = APIRouter()
-print(os.getcwd())
 
 
 @router.post("/db")
@@ -32,7 +31,6 @@ async def db_test(request: Request, data: ItemBase, db: AsyncSession = Depends(g
 @router.post("/test/redis")
 async def test_redis(request: Request, msg: str, redis=Depends(get_redis)):
     value = await redis.get(msg)
-    print(value)
     redis_response = await redis.set("test", "hello")
     return {"result": value}
 
