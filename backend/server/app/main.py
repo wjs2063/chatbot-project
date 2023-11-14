@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request
 from api.api_v1.api import api_router
 from core.config import settings
+import time
 import sqlalchemy
 from db.session import get_db, engine
 from fastapi import Depends
@@ -39,6 +40,14 @@ async def startup():
 async def shutdown():
     print("fastapi-server closed!!")
 
+# add middle ware process_time header
+@app.middleware('http')
+async def add_process_time_header(request:Request,call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
 
 @app.get("/")
 async def test():
