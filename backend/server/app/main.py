@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from asyncio import run
 from db.session import *
 from fastapi.middleware.cors import CORSMiddleware
+from core.log_config import base_logger
 
 app = FastAPI()
 app.include_router(api_router, prefix=settings.API_V1_STR)
