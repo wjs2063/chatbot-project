@@ -145,7 +145,7 @@ class SummarizeHandler(metaclass=SingletonMeta):
         dir_path = f"{audio_base_path}/{video_id}/"
         summarize_file_path = dir_path + f"{video_id}_summarize.txt"
         if os.path.isfile(path=summarize_file_path) :
-            async with aiof.open(summarize_file_path,"r",encoding='utf-8') as fd:
+            async with aiof.open(summarize_file_path,"r") as fd:
                 content = await fd.read()
             return {"content" : content}
 
