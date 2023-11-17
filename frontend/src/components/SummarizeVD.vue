@@ -20,9 +20,11 @@ const get_summarize = async () => {
         console.log(res.value)
         console.log(videoId.value)
     }
-
-
 }
+const formatWeatherSummary = (summary) => {
+      return summary.replace(/\n/g, '<br>');
+    }
+
 
 </script>
 
@@ -36,8 +38,7 @@ const get_summarize = async () => {
         </div>
         <div v-if="summary">
             <h2>Summary:</h2>
-            <p>{{ summary }}</p>
-            <div v-html="summary"></div>
+            <div v-html="formatWeatherSummary(summary)"></div>
         </div>
     </div>
 </template>
