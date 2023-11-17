@@ -1,12 +1,12 @@
 <script setup>
-    import ChatBot from "@/components/ChatBot.vue";
-
+    //import ChatBot from "@/components/ChatBot.vue";
+    //import Home from '@/pages/HomePageindex.vue'
 </script>
 
 
 
 <template>
-    <ChatBot />
+    <router-view/>
 </template>
 
 

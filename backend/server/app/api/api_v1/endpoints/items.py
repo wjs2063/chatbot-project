@@ -81,6 +81,7 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
 import json
 @router.post("/summarize_video")
 async def get_summarize(request : Request, video_id : str,summarize_handler = Depends(get_summarize_object) ):
+    print(video_id)
     response = await summarize_handler.get_summarize(video_id=video_id)
     base_logger.info(response)
     return response

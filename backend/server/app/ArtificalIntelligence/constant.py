@@ -1,1 +1,1 @@
-yt_baseurl = "https://www.youtube.com/watch?v="
+yt_baseurl = "https://www.youtube.com/watch"

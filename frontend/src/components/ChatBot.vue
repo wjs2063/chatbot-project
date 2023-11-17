@@ -88,7 +88,7 @@ const get_message = async () => {
                                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                                     alt="avatar 1" style="width: 45px; height: 100%;">
                                 <div class="p-3 ms-3">
-                                    <BounceLoader />
+                                    <BounceLoader/>
                                 </div>
                             </div>
 

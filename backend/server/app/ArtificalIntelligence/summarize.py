@@ -44,7 +44,7 @@ class AudioHandler(metaclass=SingletonMeta):
         if os.path.isfile(audio_file_path):return
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
 
-        yt = YouTube(f"{yt_baseurl}{video_id}")
+        yt = YouTube(f"{yt_baseurl}?v={video_id}")
         yt.captions.all()
         yt.streams.filter(only_audio=True).first().download(filename=audio_file_path)
         base_logger.info(f"{type(self).__name__} Successfully download youtube audio file")
@@ -56,7 +56,7 @@ class AudioHandler(metaclass=SingletonMeta):
         if is_file_exists(path=text_file_path) : return
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
         yt = YouTube(f"{yt_baseurl}{video_id}")
-        async with aiof.open(file = text_file_path, mode = 'w') as fd:
+        async with aiof.open(file = text_file_path, mode = 'a') as fd:
             await fd.write("thumbnail : " + yt.thumbnail_url)
             await fd.write("title : " + yt.title)
             await fd.write("author : " + yt.author)
@@ -83,7 +83,7 @@ class STTHandler(GPT_BASE,metaclass=SingletonMeta):
             response_format='text'
         )
         # file save
-        yt = YouTube(f"{yt_baseurl}{video_id}")
+        yt = YouTube(f"{yt_baseurl}?v={video_id}")
         async with aiof.open(stt_file_path, "w") as fd:
             await fd.writelines(f"thumbnail : {yt.thumbnail_url}\n")
             await fd.writelines(f"title : {yt.title}\n")
@@ -140,7 +140,7 @@ class SummarizeHandler(metaclass=SingletonMeta):
         self.stthandler : STTHandler = STTHandler()
 
     async def get_summarize(self,video_id:str):
-
+        content = ''
         # summarize_file 이 이전에 존재하면 그대로 return
         dir_path = f"{audio_base_path}/{video_id}/"
         summarize_file_path = dir_path + f"{video_id}_summarize.txt"
