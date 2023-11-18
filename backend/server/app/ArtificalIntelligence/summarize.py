@@ -1,6 +1,6 @@
 from pytube import YouTube
 import openai
-from openai import OpenAI
+from openai import OpenAI,AsyncOpenAI
 import aiohttp
 from dataclasses import dataclass
 import json
@@ -18,7 +18,7 @@ def is_file_exists(path):
 
 @dataclass
 class GPT_BASE :
-    client = OpenAI(api_key=settings._GPT_API_KEY)
+    client = AsyncOpenAI(api_key=settings._GPT_API_KEY)
 
 
 class SingletonMeta(type):
@@ -38,16 +38,22 @@ class AudioHandler(metaclass=SingletonMeta):
     def __init__(self):
         pass
 
-    def download_youtube_audio_file(self,video_id:str) -> None :
+    async def download_youtube_audio_file(self,video_id:str) -> None :
         dir_path = f"{audio_base_path}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
+        # 파일존재하면 종료
         if os.path.isfile(audio_file_path):return
-        os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+        try :
 
-        yt = YouTube(f"{yt_baseurl}?v={video_id}")
-        yt.captions.all()
-        yt.streams.filter(only_audio=True).first().download(filename=audio_file_path)
-        base_logger.info(f"{type(self).__name__} Successfully download youtube audio file")
+            os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+            yt = YouTube(f"{yt_baseurl}?v={video_id}")
+            yt.captions.all()
+            yt.streams.filter(only_audio=True).first().download(filename=audio_file_path)
+            base_logger.info(f"{type(self).__name__} Successfully download youtube audio file")
+        except:
+            if is_file_exists(os.path.dirname(dir_path)):
+                os.remove(os.path.dirname(dir_path))
+
 
 
     async def save_text_to_file(self,transcript:str, video_id:str) -> None :
@@ -76,22 +82,27 @@ class STTHandler(GPT_BASE,metaclass=SingletonMeta):
             async with aiof.open(stt_file_path, "r") as fd:
                 content = await fd.read()
             return content
-        audio_file = open(audio_file_path, "rb")
-        transcript = self.client.audio.transcriptions.create(
-            model='whisper-1',
-            file=audio_file,
-            response_format='text'
-        )
-        # file save
-        yt = YouTube(f"{yt_baseurl}?v={video_id}")
-        async with aiof.open(stt_file_path, "w") as fd:
-            await fd.writelines(f"thumbnail : {yt.thumbnail_url}\n")
-            await fd.writelines(f"title : {yt.title}\n")
-            await fd.writelines(f"author : {yt.author}\n" )
-            await fd.writelines(f"published_date : {yt.publish_date}\n")
-            await fd.writelines(transcript)
-            await fd.flush()
-        base_logger.info(f"{type(self).__name__} Successfully conver audio to text ")
+        try :
+            audio_file = open(audio_file_path, "rb")
+            transcript = await self.client.audio.transcriptions.create(
+                model='whisper-1',
+                file=audio_file,
+                response_format='text'
+            )
+            # file save
+            yt = YouTube(f"{yt_baseurl}?v={video_id}")
+            async with aiof.open(stt_file_path, "w") as fd:
+                await fd.writelines(f"thumbnail : {yt.thumbnail_url}\n")
+                await fd.writelines(f"title : {yt.title}\n")
+                await fd.writelines(f"author : {yt.author}\n" )
+                await fd.writelines(f"published_date : {yt.publish_date}\n")
+                await fd.writelines(transcript)
+                await fd.flush()
+            base_logger.info(f"{type(self).__name__} Successfully convert audio to text ")
+        except Exception as e :
+            if is_file_exists(stt_file_path):
+                os.remove(stt_file_path)
+            return None
         return transcript
 
 
@@ -109,9 +120,17 @@ class ChatGPT(GPT_BASE,metaclass=SingletonMeta):
     def __init__(self):
         super().__init__()
 
-    async def summarize_text(self,transcript) -> str:
+    async def get_summarize_text_from_gpt(self, transcript,video_id) -> str:
+        if transcript is None : return
+        dir_path = f"{audio_base_path}/{video_id}/"
+        summarize_file_path = dir_path + f"{video_id}_summarize.txt"
         try :
-            response = self.client.chat.completions.create(
+            if os.path.isfile(path=summarize_file_path):
+                async with aiof.open(summarize_file_path, "r") as fd:
+                    content = await fd.read()
+                return content
+
+            response = await self.client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 messages=[
                     {"role": "system",
@@ -125,9 +144,10 @@ class ChatGPT(GPT_BASE,metaclass=SingletonMeta):
                 temperature=0.7
             )
             content = response.choices[0].message.content
-            base_logger.info(f"{type(self).__name__} Successfully summarize text")
+            base_logger.info(f"{type(self).__name__} Successfully get summarize text")
         except Exception as e :
             # 로그기록하기
+            base_logger.info(e)
             print(e)
             return "Server Error Retry Later"
         return content
@@ -151,17 +171,21 @@ class SummarizeHandler(metaclass=SingletonMeta):
 
         try :
             # youtube_id 로 부터 audio_file 생성
-            self.audiohandler.download_youtube_audio_file(video_id=video_id)
+            await self.audiohandler.download_youtube_audio_file(video_id=video_id)
             # audio_file 을 text 추출
             transcript = await self.stthandler.audio_to_text(video_id=video_id)
             # gpt 에게 요약
-            content = await self.chatgpt.summarize_text(transcript)
+            content = await self.chatgpt.get_summarize_text_from_gpt(transcript=transcript,video_id=video_id)
             # 결과 저장후 리턴
             #print(content)
-            os.makedirs(os.path.dirname(dir_path), exist_ok=True)
-            async with aiof.open(summarize_file_path, "w") as fd:
-                await fd.write(content)
-                await fd.flush()
+            # if file does not exist then write
+            if content is None :
+                return {"content" : "Something is wrong"}
+            if not is_file_exists(summarize_file_path):
+                os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+                async with aiof.open(summarize_file_path, "a") as fd:
+                    await fd.write(content)
+                    await fd.flush()
         except Exception as e :
             print(e)
         return {"content" : content}
