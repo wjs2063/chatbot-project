@@ -1,6 +1,7 @@
 # chatbot-project
 
-- Backend : Fastapi -> default 비동기 지원 및 해당 프로젝트는 데부분 File I/O 및 Network I/O 이므로 파이썬도 충분한 성능을 낼수있다고판단, 그리고 빠른 개발속도 
+- Backend : Fastapi
+  - 선정이유 : default 비동기 지원 및 해당 프로젝트는 데부분 File I/O 및 Network I/O 이므로 파이썬도 충분한 성능을 낼수있다고판단, 그리고 빠른 개발속도 
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
 - AI : chatgpt ( 프롬프트 엔지니어링 추가)
 - 2023/10/24 (redis 추가 및 WIT.AI 서버 추가)
