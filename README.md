@@ -18,8 +18,9 @@
 
 ### API Gateway + ReverseProxy (Nginx)
 - Nginx
+- Nginx ( frontend 정적파일 제공)
 - Nginx as a gateway server ( Routing)
-- 적절한 Routing 기법을 통해 해당 용도에맞는 뒷단의 서버로 요청
+- Nginx location을 통해  해당 API용도에맞는 뒷단의 서버로 요청
 - SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. (Kubernetes 를 이용한 자동 scale out) 
 
 ### Frontend
@@ -71,6 +72,19 @@ Project 구성 비용 :
 
 ### USAGE 
 
+#### Nginx 
+```
+/etc/nginx/conf.d/chatbot-route.conf
+/etc/nginx/nginx.conf
+
+해당경로에 conf 파일 넣어두기
+
+/code/dist -> static files 경로 
+
+
+```
+
+
 #### frontend
 
 ```
@@ -83,7 +97,7 @@ npm run serve
 
 npm run build
 
-serve -l [port] dist
+dist 파일 Nginx 컨테이너의 /code에 두기 
 
 ```
 
