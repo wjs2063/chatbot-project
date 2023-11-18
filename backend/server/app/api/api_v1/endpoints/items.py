@@ -13,6 +13,7 @@ import os
 from crud.crud_item import *
 import requests
 import openai
+from openai import AsyncOpenAI
 import re
 from ArtificalIntelligence.witAI import WitAI, witai, WitResponse
 from ArtificalIntelligence.summarize import get_summarize_object
@@ -53,9 +54,9 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
                 # print("cache value : ", value.decode('utf-8'))
                 return {"result": value}
 
-        openai.api_key = settings._GPT_API_KEY
+        gpt = AsyncOpenAI(api_key=settings._GPT_API_KEY)
         # print(chatmessage)
-        response = await openai.ChatCompletion.acreate(
+        response = await gpt.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system",
@@ -69,7 +70,7 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
             ],
             temperature=0.2
         )
-        response_str = response["choices"][0]["message"]["content"]
+        response_str = response.choices[0].message.content
         response_str = re.sub("gpt | GPT | OpenAI | openai | chatgpt", "", response_str)
         if wit_confidence > 0.95:
             await redis.set(wit_intent, response_str)

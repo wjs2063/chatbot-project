@@ -38,5 +38,5 @@ async def get_redis():
     try :
         yield redis_conn
     finally:
-        await redis_conn.close()
+        await redis_conn.aclose()
 print("redis connections is created!")
