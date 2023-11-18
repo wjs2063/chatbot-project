@@ -1,6 +1,6 @@
 # chatbot-project
 
-- Backend : Fastapi
+- Backend : Fastapi -> default 비동기 지원 및 해당 프로젝트는 데부분 File I/O 및 Network I/O 이므로 파이썬도 충분한 성능을 낼수있다고판단, 그리고 빠른 개발속도 
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
 - AI : chatgpt ( 프롬프트 엔지니어링 추가)
 - 2023/10/24 (redis 추가 및 WIT.AI 서버 추가)
@@ -10,11 +10,16 @@
 - 대화형 멀티턴 chatbot 시스템
 - video_summarization 기능 추가 (2023-11-14)
 
-### 기대효과
+### Video Summarize 기대효과
 - video_summarization := 바빠서 영상을 차마 다 보지못하거나, 기상청 예보같은(5~6분) 결론만필요한 영상들에대해 빠르게 요약결과를 내어줄수있다. (이미 요청한 동영상 요약결과는 0.3초만에 받아볼수있음)
 - https://www.youtube.com/watch?v=fb8FalIe0Ig (15분) X-process_time = 95초
 - https://www.youtube.com/watch?v=IEEgpggMKBs (6분 %6초) X-process_time = 57초
 - ![image](https://github.com/wjs2063/chatbot-project/assets/76778082/55777adb-0beb-4cff-931c-7d5df942c8d3)
+
+### Chatbot 기대효과
+사용자의 질문에 맞는 응답제공
+
+![스크린샷 2023-10-19 234936](https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9)   
 
 
 
@@ -72,11 +77,6 @@ Project 구성 비용 :
 
 
  
-### 결과예시
-
-
-![스크린샷 2023-10-19 234936](https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9)   
-
 
 ### USAGE 
 
