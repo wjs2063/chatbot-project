@@ -7,7 +7,7 @@ let res = ref('')
 let summary = ref('')
 const get_summarize = async () => {
     try {
-        let response = await axios.post('http://www.codeplanet.site:50000/api/v1/items/summarize_video', {}, {
+        let response = await axios.post('http://www.codeplanet.site:9999/api/v1/items/summarize-video', {}, {
                 params: {
                     "video_id": videoId.value
                 },
@@ -15,6 +15,7 @@ const get_summarize = async () => {
         )
         summary.value = response.data.content
 
+        console.log(summary.value)
     } catch (e) {
         res.value = 'Server Error'
         console.log(res.value)

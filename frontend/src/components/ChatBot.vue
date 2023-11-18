@@ -17,7 +17,7 @@ const get_message = async () => {
         "messages": msg
     }
     try {
-        let res = await axios.post('http://www.codeplanet.site:50000/api/v1/items/chat',
+        let res = await axios.post('http://www.codeplanet.site:9999/api/v1/items/chat',
             JSON.parse(JSON.stringify(body))
         )
         chatbot_message.value = res.data["result"]

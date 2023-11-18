@@ -21,6 +21,7 @@ origins = [
     # "http://172.30.1.50:3000",
     "http://www.codeplanet.site",
     "http://www.codeplanet.site:50001",
+    "http://www.codeplanet.site:9999"
 ]
 
 app.add_middleware(
