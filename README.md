@@ -10,6 +10,14 @@
 - 대화형 멀티턴 chatbot 시스템
 - video_summarization 기능 추가 (2023-11-14)
 
+### 기대효과
+- video_summarization := 바빠서 영상을 차마 다 보지못하거나, 기상청 예보같은(5~6분) 결론만필요한 영상들에대해 빠르게 요약결과를 내어줄수있다. (이미 요청한 동영상 요약결과는 0.3초만에 받아볼수있음)
+- https://www.youtube.com/watch?v=fb8FalIe0Ig -> X-process_time = 95초
+- https://www.youtube.com/watch?v=IEEgpggMKBs -> X-process_time = 57초
+- ![image](https://github.com/wjs2063/chatbot-project/assets/76778082/55777adb-0beb-4cff-931c-7d5df942c8d3)
+
+
+
 ### Backend
 - Infra : Docker
 - Language : Python
