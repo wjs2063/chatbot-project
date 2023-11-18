@@ -2,8 +2,8 @@
 
 import {createRouter,createWebHistory} from "vue-router";
 import Home from '../pages/HomePageindex.vue'
-import Summarize from '@/pages/SummarizeVideo/SummarizeVideoindex.vue'
-import Chatbot from '@/pages/ChatBot/ChatBotindex.vue'
+import Summarize from '@/pages/summarizeVideo/SummarizeVideoindex.vue'
+import Chatbot from '@/pages/chatbot/ChatBotindex.vue'
 const router = createRouter(
     {
         history :createWebHistory(),
@@ -14,13 +14,13 @@ const router = createRouter(
                 component : Home
             },
             {
-                path : '/SummarizeVideo',
-                name : 'SummarizeVideo',
+                path : '/summarizeVideo',
+                name : 'summarizeVideo',
                 component : Summarize
             },
                         {
-                path : '/ChatBot',
-                name : 'ChatBot',
+                path : '/chatbot',
+                name : 'chatbot',
                 component : Chatbot
             }
         ]
