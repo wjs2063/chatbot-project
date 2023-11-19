@@ -22,3 +22,11 @@ services:
     volumes:
       - "$PWD/redis:/code"
     tty : true
+
+  nginx-gateway:
+    image: nginx:1.24-alpine
+    ports:
+      - "9999:80"
+    volumes:
+      - "$PWD:/code"
+    tty: true
