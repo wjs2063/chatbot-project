@@ -39,4 +39,4 @@ async def get_redis():
         yield redis_conn
     finally:
         await redis_conn.aclose()
-print("redis connections is created!")
+print("DATABASE_SESSION LOADED!")

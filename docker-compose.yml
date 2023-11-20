@@ -9,7 +9,7 @@ services:
       - $PWD:/code
     tty : true
   db:
-    image: postgres
+    image: postgres:11.22-alpine3.18
     restart: always
     ports :
       - "8080:5432"
