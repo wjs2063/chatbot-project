@@ -2,7 +2,7 @@ version : "3.8"
 
 services:
   fapi :
-    image : "python:3.11-alpine"
+    image : "python:3.11.5-alpine"
     ports :
       - "50000:8000"
     volumes :
