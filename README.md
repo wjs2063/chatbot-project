@@ -132,5 +132,5 @@ uvicorn main:app --host=0.0.0.0
 필요시 
 
 ```
-apk add gcc g++
+apk add gcc g++ linux-headers
 ```
