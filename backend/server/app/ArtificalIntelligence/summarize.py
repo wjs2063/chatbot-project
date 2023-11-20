@@ -134,14 +134,14 @@ class ChatGPT(GPT_BASE, metaclass=SingletonMeta):
                 async with aiof.open(summarize_file_path, "r") as fd:
                     content = await fd.read()
                 return content
-
+            now = datetime.datetime.now()
             response = await self.client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 messages=[
                     {"role": "system",
                      "content": "너는 요약을 해주는 summarize system 이야. 상세하게 요약을 해줄수있도록해, Chapter로 나누면 더좋을것같아."},
                     {"role": "assistant",
-                     "content":  f"너는 <summarize assistant>야 제목, 소주제별 요약을 professional하게 해줘, 요약시간은 {datetime.date.now()} 이야"
+                     "content":  f"너는 <summarize assistant>야 제목, 소주제별 요약을 professional하게 해줘, <요약시작 시간>은 <{now.year}-{now.month}-{now.day} {now.hour}:{now.minute}>니까 처음에 꼭 명시해줘 "
                      },
                     {"role": "user", "content": transcript},
 
@@ -151,6 +151,8 @@ class ChatGPT(GPT_BASE, metaclass=SingletonMeta):
             content = response.choices[0].message.content
             base_logger.info(f"{type(self).__name__} Successfully get summarize text")
         except Exception as e:
+            if is_file_exists(summarize_file_path):
+                os.remove(summarize_file_path)
             # 로그기록하기
             base_logger.info(e)
             print(e)
