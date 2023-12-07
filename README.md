@@ -10,6 +10,7 @@
 ### 기능 
 - 대화형 멀티턴 chatbot 시스템
 - video_summarization 기능 추가 (2023-11-14)
+- video_streaming 기능 추가 (2023-12-07)
 
 ### Video Summarize 기대효과
 - video_summarization := 바빠서 영상을 차마 다 보지못하거나, 기상청 예보같은(5~6분) 결론만필요한 영상들에대해 빠르게 요약결과를 내어줄수있다. (이미 요청한 동영상 요약결과는 0.3초만에 받아볼수있음)
