@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 .idea
 .env
-.mp4
+*.mp4
 # add DS_Store
 .DS_Store
 # exclude venv
