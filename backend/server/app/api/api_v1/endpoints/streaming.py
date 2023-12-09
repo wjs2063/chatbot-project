@@ -10,9 +10,6 @@ router = APIRouter()
 
 
 
-async def fake_video_streamer():
-    for i in range(10):
-        yield b"some fake video bytes"
 
 
 # this is streaming test api
@@ -21,10 +18,10 @@ async def main():
 
     some_file_path = "/code/backend/server/weather.mp4"
     def iterfile():  #
-        chunk_size = 1024
-        with open(some_file_path, mode="rb") as file_like:  #
+        chunk_size = 1024 * 32
+        with open(some_file_path, mode="rb") as stream_fd:  #
             while True:
-                chunk = file_like.read(chunk_size)
+                chunk = stream_fd.read(chunk_size)
                 if not chunk:
                     break
                 yield chunk
