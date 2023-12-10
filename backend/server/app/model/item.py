@@ -21,3 +21,9 @@ class Item(Base):
     def __repr__(self):
         return f"{type(self).__name__}(id={self.id!r}, title={self.title!r}, description={self.description!r})"
 
+class UserModel(Base):
+    __tablename__ = "users"
+    id = Column(Integer,primary_key=True, index=True,autoincrement=True)
+    name = Column(String)
+    user_id = Column(String,index=True,unique=True)
+    password = Column(String)

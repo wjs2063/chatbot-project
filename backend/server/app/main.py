@@ -56,5 +56,4 @@ async def add_process_time_header(request:Request,call_next):
 
 @app.get("/")
 async def test():
-    sle
     return "hello Welcome to fastapi"
