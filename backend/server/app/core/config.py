@@ -1,4 +1,4 @@
-from typing import *
+from typing import Optional,Dict,Any
 import os
 from dotenv import load_dotenv,find_dotenv
 from sqlalchemy import URL
@@ -23,11 +23,11 @@ class Settings(BaseSettings):
     REDIS_SERVER : str = os.getenv("_HOME_PUBLIC_IP","127.0.0.1") # HOME PUBLIC IP
     REDIS_PORT : str = "6379"
     WIT_AI_SERVER_TOKEN : str = os.getenv("_WIT_AI_SERVER_TOKEN","test")
-
-    print(POSTGRES_SERVER,REDIS_SERVER)
+    SECRET_KEY : str = os.environ["_SECRET_KEY"]
+    ALGORITHM : str = os.getenv("_ALGORITHM","HS256")
+    ACCESS_TOKEN_EXPIRE_MINUTES : str = os.getenv("_ACCESS_TOKEN_EXPIRE_MINUTES",30)
     ASYNC_SQLALCHEMY_DATABASE_URL: str = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@" \
         f"{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
-    print(ASYNC_SQLALCHEMY_DATABASE_URL)
     """
     SQLALCHEMY_DATABASE_URL : "driver://[USER]:[PASSWORD]@[SERVER]:[PORT]/[DATABASE] 형식"
     "postgresql+psycopg2://scott:tiger@localhost:5432/mydatabase"

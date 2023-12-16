@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine,AsyncSession,AsyncEngine,async_sessionmaker
 from core.config import settings
 import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
+from db.base import metadata,Base
 from asyncio import run
 import redis.asyncio as aioredis
 
@@ -15,9 +15,7 @@ engine = create_async_engine(
 
 sessionLocal = async_sessionmaker(bind=engine,autocommit=False,class_=AsyncSession,autoflush=True,expire_on_commit=False)
 #sessionLocal = AsyncSession(bind=engine)
-Base = declarative_base()
 
-metadata = Base.metadata
 
 async def create_tables(engine : AsyncSession,metadata) -> None:
     async with engine.begin() as conn:

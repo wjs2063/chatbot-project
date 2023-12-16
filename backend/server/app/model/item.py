@@ -27,3 +27,6 @@ class UserModel(Base):
     name = Column(String)
     user_id = Column(String,index=True,unique=True)
     password = Column(String)
+
+    def __repr__(self):
+        return f"{type(self).__name__}(id={self.id!r}, name={self.name!r}, user_id={self.user_id!r}), password = secret!!"

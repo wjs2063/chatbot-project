@@ -36,11 +36,15 @@ class ChatMessage(BaseModel):
 class RedisHandler():
     pass
 
-class UserSchema(BaseModel):
+
+class BaseUser(BaseModel):
     name: str
     user_id : str
-    user_password : str
 
+
+
+class UserSchema(BaseUser):
+    user_password : Optional[str]
     @field_validator('name')
     @classmethod
     def check_nameform(cls,v:str):
@@ -61,6 +65,22 @@ class UserSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# class LoginForm(BaseModel):
+#     user_id : str
+#     user_password : str
+#
+#     @field_validator('user_password')
+#     @classmethod
+#     def check_password(cls,v:str):
+#         if isinstance(v,str):
+#             if len(v) < 8:
+#                 raise ValueError('비밀번호는 8자이상만 가능합니다.')
+#         return v
+#
+#     class Config:
+#         from_attributes = True
 
 
 print("model.item class is created!")
