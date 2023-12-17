@@ -20,6 +20,10 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: str | None = None
 
+
+def get_hashed_password(plain_password):
+    return pwd_context.hash(plain_password)
+
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -38,7 +42,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     encoded_jwt = jwt.encode(to_encode,SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-async def get_current_user(db:AsyncSession = Depends(get_db),token: str = Depends(oauth2_scheme)) -> UserSchema:
+async def get_current_user(db:AsyncSession = Depends(get_db),token: str = Depends(oauth2_scheme)) -> BaseUser:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -52,8 +56,8 @@ async def get_current_user(db:AsyncSession = Depends(get_db),token: str = Depend
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = await crud.get_user(db = db,user_id=token_data.username)
+    user = await crud.get_user(db = db,login_id=token_data.username)
     #user = get_user(fake_users_db, username=token_data.username)
     if user is None:
         raise credentials_exception
-    return BaseUser(name=user.name,user_id=user.user_id)
+    return BaseUser(name=user.name,login_id=user.login_id)

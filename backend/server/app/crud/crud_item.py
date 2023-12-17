@@ -27,8 +27,8 @@ class CRUD(metaclass=SingletonMeta):
         result = result.scalars()
         return result
 
-    async def get_user(self,db,user_id):
-        stmt = select(UserModel).where(UserModel.user_id == user_id).limit(1)
+    async def get_user(self,db,login_id):
+        stmt = select(UserModel).where(UserModel.login_id == login_id).limit(1)
         response = await db.execute(stmt)
         await db.commit()
         result = response.scalars().first()

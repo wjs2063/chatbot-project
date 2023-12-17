@@ -4,8 +4,8 @@ return schema
 """
 from typing import Optional
 from dataclasses import dataclass
-from pydantic import BaseModel,field_validator
-from typing import Dict,List,Optional,Union
+from pydantic import BaseModel, field_validator, BaseConfig
+from typing import Dict, List, Optional, Union
 from core.config import settings
 from sqlalchemy.ext.asyncio import AsyncSession
 import requests
@@ -27,9 +27,7 @@ class ItemScheme(ItemBase):
 
 @dataclass
 class ChatMessage(BaseModel):
-    messages : str
-
-
+    messages: str
 
 
 @dataclass
@@ -39,32 +37,43 @@ class RedisHandler():
 
 class BaseUser(BaseModel):
     name: str
-    user_id : str
-
+    login_id: str
 
 
 class UserSchema(BaseUser):
-    user_password : Optional[str]
+    password: Optional[str]
+
     @field_validator('name')
     @classmethod
-    def check_nameform(cls,v:str):
+    def check_nameform(cls, v: str):
         # 대문자 및 특수문자 존재여부
         if isinstance(v, str):
-            if len(v) < 3 :
+            if len(v) < 3:
                 raise ValueError('이름은 세글자 이상만 가능합니다.')
         return v
 
-    @field_validator('user_id')
+    @field_validator('login_id')
     @classmethod
-    def check_nameform(cls,v:str):
+    def check_nameform(cls, v: str):
         # 대문자 및 특수문자 존재여부
         if isinstance(v, str):
-            if len(v) < 8 :
-                raise ValueError('아이디 길이는 8자이상만 가능합니다.')
+            if len(v) < 5:
+                raise ValueError('아이디 길이는 5자이상만 가능합니다.')
         return v
 
-    class Config:
+
+    class Config(BaseConfig):
         from_attributes = True
+        json_schema_extra = {
+            "examples": [
+                {
+                    "name": "foobar",
+                    "login_id" : "aaa1234",
+                    "password" : "12345678"
+
+                }
+            ]
+        }
 
 
 # class LoginForm(BaseModel):
