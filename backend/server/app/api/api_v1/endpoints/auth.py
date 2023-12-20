@@ -4,8 +4,8 @@ from sqlalchemy import select
 from datetime import datetime, timedelta
 from fastapi import Depends, APIRouter,Request,HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from schema.item import UserSchema,BaseUser
-from model.item import UserModel
+from schema.users.user import UserSchema,BaseUser
+from model.users.user import UserModel
 from db.session import get_db
 from core.constant import ACCESS_TOKEN_EXPIRE_MINUTE
 from crud.crud_item import crud
@@ -17,7 +17,7 @@ router = APIRouter()
 @router.post("/sign-up")
 async def create_user(user:UserSchema,db : AsyncSession = Depends(get_db)):
 
-    # check if user exists
+    # check if users exists
     result = await crud.get_user(db,login_id=user.login_id)
     if result:
         return {"msg" : "이미 가입된 회원입니다. 회원찾기를 이용해주세요"}

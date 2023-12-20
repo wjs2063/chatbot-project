@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from core.config import settings
-from schema.item import ChatMessage
+from schema.common import ChatMessage
 from typing import Optional,Union,Dict
 import aiohttp
 from abc import ABCMeta,abstractmethod

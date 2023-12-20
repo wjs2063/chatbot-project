@@ -7,7 +7,8 @@ from core.config import settings
 import sys
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.encoders import jsonable_encoder
-from schema.item import ItemBase, ItemScheme, ChatMessage
+from schema.items.item import ItemBase, ItemScheme
+from schema.common import ChatMessage
 from core.log_config import base_logger
 import os
 from crud.crud_item import *

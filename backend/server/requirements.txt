@@ -7,7 +7,7 @@ async-timeout==4.0.3
 asyncpg==0.28.0
 attrs==23.1.0
 bardapi==0.1.38
-bcrypt==4.1.2
+bcrypt==4.0.1
 beautifulsoup4==4.12.2
 browser-cookie3==0.19.1
 cachetools==5.3.1

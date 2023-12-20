@@ -2,8 +2,10 @@ from typing import Annotated
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from fastapi import Depends, APIRouter,HTTPException
-from schema.item import UserSchema,ItemBase
-from model.item import UserModel,Item
+from schema.users.user import UserSchema
+from schema.items.item import ItemBase
+from model.users.user import UserModel
+from model.items.item import Item
 from db.session import get_db
 
 

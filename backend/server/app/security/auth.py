@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from core.constant import SECRET_KEY,ALGORITHM
 from fastapi import Depends, FastAPI, HTTPException, status
 from crud.crud_item import crud
-from schema.item import UserSchema,BaseUser
+from schema.users.user import UserSchema,BaseUser
 from db.session import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token")
@@ -57,7 +57,7 @@ async def get_current_user(db:AsyncSession = Depends(get_db),token: str = Depend
     except JWTError:
         raise credentials_exception
     user = await crud.get_user(db = db,login_id=token_data.username)
-    #user = get_user(fake_users_db, username=token_data.username)
+    #users = get_user(fake_users_db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return BaseUser(name=user.name,login_id=user.login_id)

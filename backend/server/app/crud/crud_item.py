@@ -1,11 +1,10 @@
 from db.session import sessionLocal
-import model.item as model
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import Table, select
 from core.config import settings
 from core.log_config import SingletonMeta
-from model.item import UserModel
+from model.users.user import UserModel
 from db.base import metadata
 import requests
 import aiohttp

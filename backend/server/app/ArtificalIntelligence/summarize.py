@@ -143,7 +143,7 @@ class ChatGPT(GPT_BASE, metaclass=SingletonMeta):
                     {"role": "assistant",
                      "content":  f"너는 <summarize assistant>야 제목, 소주제별 요약을 professional하게 해줘, <요약시작 시간>은 <{now.year}-{now.month}-{now.day} {now.hour}:{now.minute}>니까 처음에 꼭 명시해줘 "
                      },
-                    {"role": "user", "content": transcript},
+                    {"role": "users", "content": transcript},
 
                 ],
                 temperature=0.7
