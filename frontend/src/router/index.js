@@ -5,6 +5,7 @@ import Home from '../pages/HomePageindex.vue'
 import Summarize from '@/pages/summarizeVideo/SummarizeVideoindex.vue'
 import Chatbot from '@/pages/chatbot/ChatBotindex.vue'
 import VideoStreaming from '@/pages/video_streaming/VideoStreamingindex.vue'
+import LoginForm from "@/pages/Login/LoginFormindex.vue";
 const router = createRouter(
     {
         history :createWebHistory(),
@@ -28,6 +29,11 @@ const router = createRouter(
                 path : '/video/streaming',
                 name : 'streaming',
                 component : VideoStreaming
+            },
+            {
+                path : '/login',
+                name : 'sign-up',
+                component : LoginForm
             }
         ]
     }
