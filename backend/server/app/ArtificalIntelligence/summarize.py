@@ -13,6 +13,7 @@ import aiofiles as aiof
 from core.constant import audio_base_path
 from ArtificalIntelligence.constant import yt_baseurl
 from core.log_config import base_logger
+from meta.common import SingletonMeta
 
 
 def is_file_exists(path):
@@ -25,14 +26,6 @@ class GPT_BASE:
     client = AsyncOpenAI(api_key=settings._GPT_API_KEY)
 
 
-class SingletonMeta(type):
-    _instances = {}
-
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            instance = super().__call__(*args, **kwargs)
-            cls._instances[cls] = instance
-        return cls._instances[cls]
 
 
 class AudioHandler(metaclass=SingletonMeta):
@@ -143,7 +136,7 @@ class ChatGPT(GPT_BASE, metaclass=SingletonMeta):
                     {"role": "assistant",
                      "content":  f"너는 <summarize assistant>야 제목, 소주제별 요약을 professional하게 해줘, <요약시작 시간>은 <{now.year}-{now.month}-{now.day} {now.hour}:{now.minute}>니까 처음에 꼭 명시해줘 "
                      },
-                    {"role": "users", "content": transcript},
+                    {"role": "user", "content": transcript},
 
                 ],
                 temperature=0.7

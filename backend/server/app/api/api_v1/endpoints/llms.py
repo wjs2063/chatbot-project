@@ -24,7 +24,7 @@ router = APIRouter()
 
 
 
-@router.post('/chat')
+@router.post('/chat', summary = "GPT 채팅")
 async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSession = Depends(get_db),
                       redis=Depends(get_redis)):
     # get response from witai
@@ -68,7 +68,7 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
         return {"result": "retry next time"}
 
 import json
-@router.post("/summarize-video")
+@router.post("/summarize-video", summary = "비디오 요약")
 async def get_summarize(request : Request, video_id : str,summarize_handler = Depends(get_summarize_object) ):
     response = await summarize_handler.get_summarize(video_id=video_id)
     base_logger.info(response)

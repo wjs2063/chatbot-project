@@ -14,7 +14,7 @@ from security.auth import create_access_token,Token,get_current_user,get_hashed_
 router = APIRouter()
 
 
-@router.post("/sign-up")
+@router.post("/sign-up", summary = "회원가입")
 async def create_user(user:UserSchema,db : AsyncSession = Depends(get_db)):
 
     # check if users exists
@@ -35,7 +35,7 @@ async def create_user(user:UserSchema,db : AsyncSession = Depends(get_db)):
 
 
 
-@router.post('/token',response_model =Union[Token,Dict])
+@router.post('/token',response_model =Union[Token,Dict], summary = "액세스 토큰 발급")
 async def sign_in(request:Request,form_data: Annotated[OAuth2PasswordRequestForm, Depends()],db : AsyncSession = Depends(get_db)):
     login_id = form_data.username
     result = await crud.get_user(db,login_id)
@@ -55,7 +55,7 @@ async def sign_in(request:Request,form_data: Annotated[OAuth2PasswordRequestForm
     return {"access_token" : access_token,"token_type" : "bearer"}
 
 
-@router.get("/users/me",response_model = BaseUser)
+@router.get("/users/me",response_model = BaseUser, summary = "인증 토큰 확인")
 async def read_items(current_user: BaseUser = Depends(get_current_user)):
     return current_user
 

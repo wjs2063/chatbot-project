@@ -1,6 +1,6 @@
 from core.config import settings
 
-audio_base_path = "audio_dir"
+audio_base_path = "/code/backend/server"
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM

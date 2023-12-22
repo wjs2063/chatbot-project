@@ -5,11 +5,11 @@ from api.api_v1.api import api_router
 from core.config import settings
 import time
 import sqlalchemy
-from db.session import get_db, engine
+from db.session import get_db, engine,create_tables
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from asyncio import run
-from db.session import *
+from db.base import Base
 from fastapi.middleware.cors import CORSMiddleware
 from core.log_config import base_logger
 
@@ -19,6 +19,7 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 origins = [
     "http://localhost:3000",
     # "http://172.30.1.50:3000",
+    'http://localhost:50001',
     "http://www.codeplanet.site",
     "http://www.codeplanet.site:50001",
     "http://www.codeplanet.site:9999"
@@ -37,7 +38,7 @@ app.add_middleware(
 async def startup():
     print("main_directory : ",os.getcwd())
     print("fastapi-server started!!")
-    await create_tables(engine=engine, metadata=metadata)
+    await create_tables(engine=engine, base=Base)
     print("postgresql-tables created!!")
 
 
