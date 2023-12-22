@@ -13,6 +13,13 @@
 - video_streaming 기능 추가 (2023-12-07)
 - video_streaming 빨리감기 되감기 기능추가(2023-12-21)
 
+### Video Streaming 
+- youtube video_id 를 가지고 준비요청을 보내면 서버에서 다운로드후 영상 스트리밍
+
+개선사항 : youtube가 아니더라도 저작권에 걸리지않는 영화를 스트리밍 진행 (현재는 유튜브만 가능)
+<img width="1504" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/15edd4d9-546f-48d9-a058-377a00b67f46">
+
+
 ### Video Summarize 기대효과
 - video_summarization := 바빠서 영상을 차마 다 보지못하거나, 기상청 예보같은(5~6분) 결론만필요한 영상들에대해 빠르게 요약결과를 내어줄수있다. (이미 요청한 동영상 요약결과는 0.3초만에 받아볼수있음)
 - https://www.youtube.com/watch?v=fb8FalIe0Ig (15분) X-process_time = 95초
