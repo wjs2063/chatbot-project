@@ -43,7 +43,7 @@ const dynamic = () => {
     <title>FastAPI video streaming</title>
   </head>
   <textarea v-model="request_video_id"></textarea>
-  <button v-if="showButton" @click="download()">요청 보내기</button>
+  <button v-if="showButton" @click="download()">영상 준비 요청</button>
   <body>
   <div v-if="is_filled()">
     <video width="1200" controls>
