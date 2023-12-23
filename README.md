@@ -16,8 +16,12 @@
 ### Video Streaming 
 - youtube video_id 를 가지고 준비요청을 보내면 서버에서 다운로드후 영상 스트리밍
 
-개선사항 : youtube가 아니더라도 저작권에 걸리지않는 영화를 스트리밍 진행 (현재는 유튜브만 가능)
-<img width="1504" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/15edd4d9-546f-48d9-a058-377a00b67f46">
+ ~~개선사항 : youtube가 아니더라도 저작권에 걸리지않는 영화를 스트리밍 진행 (현재는 유튜브만 가능)~~
+
+- 개선사항 : 저작권에 걸리지않는 영화목록 스트리밍 기능 추가
+<img width="300" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/219c7360-439c-41ac-b558-8a516544e68b">
+<img width="300" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/16d7ce0a-c6dd-4efb-8d3b-07a0e3ff1783">
+
 
 
 ### Video Summarize 기대효과
@@ -25,6 +29,8 @@
 - https://www.youtube.com/watch?v=fb8FalIe0Ig (15분) X-process_time = 95초
 - https://www.youtube.com/watch?v=IEEgpggMKBs (6분 %6초) X-process_time = 57초
 - ![image](https://github.com/wjs2063/chatbot-project/assets/76778082/55777adb-0beb-4cff-931c-7d5df942c8d3)
+
+
 
 ### Chatbot 기대효과
 사용자의 질문에 맞는 응답제공
