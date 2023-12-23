@@ -1,15 +1,14 @@
 from db.session import sessionLocal
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import Table, select
+from sqlalchemy import Table, select,and_
 from core.config import settings
 from core.log_config import SingletonMeta
 from model.users.user import UserModel
+from model.videos.video import Videos
 from db.base import metadata
 import requests
 import aiohttp
-
-
 
 
 class CRUD(metaclass=SingletonMeta):
@@ -26,13 +25,20 @@ class CRUD(metaclass=SingletonMeta):
         result = result.scalars()
         return result
 
-    async def get_user(self,db,login_id):
+    async def get_user(self, db, login_id):
         stmt = select(UserModel).where(UserModel.login_id == login_id).limit(1)
         response = await db.execute(stmt)
         await db.commit()
         result = response.scalars().first()
         return result
 
+    async def get_video_list(self, db, page, last_seen=0):
+        offset = 10 * last_seen
+        stmt = select(Videos).where(and_(Videos.id >= offset,Videos.id < offset + 10 * page)).order_by(Videos.id).limit(10)
+        response = await db.execute(stmt)
+        await db.commit()
+        results = response.scalars().all()
+        return results
 
 
 # async def insert(db: AsyncSession, data):

@@ -25,7 +25,7 @@
           <router-link class="nav-link" to="/chatbot">챗봇</router-link>
         </li>
         <li class="nav-item-streaming">
-          <router-link class="nav-link" to="/video/streaming">비디오 스트리밍</router-link>
+          <router-link class="nav-link" to="/video/streaming">저작권 만료 영화 보기</router-link>
         </li>
         <!--        <li class="nav-item-login">-->
         <!--          <router-link class="nav-link" to="/login">로그인</router-link>-->
