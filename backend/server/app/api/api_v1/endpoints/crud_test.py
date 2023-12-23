@@ -6,22 +6,23 @@ from schema.users.user import UserSchema
 from schema.items.item import ItemBase
 from model.users.user import UserModel
 from model.items.item import Item
+from model.videos.video import Video
+from schema.videos.video import VideoSchema
 from db.session import get_db
 
 
 router = APIRouter()
 
 
-@router.post("/create_item")
-async def create_item(item:ItemBase,db : AsyncSession = Depends(get_db)):
-    db_item = Item(
-        title=item.title,
-        description=item.description
+@router.post("/create_db_detail",response_model = VideoSchema)
+async def create_item(video : VideoSchema,db : AsyncSession = Depends(get_db)):
+    vd_item = Video(
+        name=video.name
     )
     try :
-        db.add(db_item)
+        db.add(vd_item)
         await db.commit()
     except:
         raise HTTPException(status_code=500,detail="cannot insert into database",headers={"X-ERROR" : "db_error"})
-    return {"item" : item}
+    return video
 

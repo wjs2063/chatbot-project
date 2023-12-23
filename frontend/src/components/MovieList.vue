@@ -3,8 +3,8 @@
     <h2>Movie List</h2>
     <ul>
       <li v-for="movie in movies" :key="movie.video_name">
-        <router-link :to="{ name: 'movieDetail', params: { video_name: movie.video_name }}">
-          <button>{{ movie.video_name }}</button>
+        <router-link :to="{ name: 'movieDetail', params: { video_name: movie.name }}">
+          <button>{{ movie.name }}</button>
         </router-link>
       </li>
     </ul>

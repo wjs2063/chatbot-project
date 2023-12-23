@@ -5,7 +5,7 @@ from sqlalchemy import Table, select,and_
 from core.config import settings
 from core.log_config import SingletonMeta
 from model.users.user import UserModel
-from model.videos.video import Videos
+from model.videos.video import Video
 from db.base import metadata
 import requests
 import aiohttp
@@ -34,7 +34,7 @@ class CRUD(metaclass=SingletonMeta):
 
     async def get_video_list(self, db, page, last_seen=0):
         offset = 10 * last_seen
-        stmt = select(Videos).where(and_(Videos.id >= offset,Videos.id < offset + 10 * page)).order_by(Videos.id).limit(10)
+        stmt = select(Video).where(and_(Video.id >= offset,Video.id < offset + 10 * page)).order_by(Video.id).limit(10)
         response = await db.execute(stmt)
         await db.commit()
         results = response.scalars().all()

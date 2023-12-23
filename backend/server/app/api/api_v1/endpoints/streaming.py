@@ -8,7 +8,7 @@ from db.session import get_db
 from crud.crud_item import crud
 import mimetypes
 import os
-from model.videos.video import Videos
+from model.videos.video import Video
 from schema.videos.video import VideoSchema
 
 router = APIRouter()

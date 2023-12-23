@@ -5,14 +5,14 @@ from pydantic import BaseModel, field_validator, BaseConfig
 
 
 class BasicVideoSchema(BaseModel):
-    video_name : str
+    name : str
 
     class Config(BaseConfig):
         from_attributes = True
         json_schema_extra = {
             "examples": [
                 {
-                    "video_name" : "aaa1234",
+                    "name" : "Triumph des Willens_1935"
 
                 }
             ]
@@ -22,7 +22,7 @@ class BasicVideoSchema(BaseModel):
 
 class VideoSchema(BasicVideoSchema):
 
-    @field_validator('video_name',mode='before')
+    @field_validator('name',mode='before')
     @classmethod
     def check_nameform(cls, v: str):
         # 대문자 및 특수문자 존재여부
@@ -36,7 +36,7 @@ class VideoSchema(BasicVideoSchema):
         json_schema_extra = {
             "examples": [
                 {
-                    "video_name" : "Triumph des Willens_1935"
+                    "name" : "Triumph des Willens_1935"
 
                 }
             ]
