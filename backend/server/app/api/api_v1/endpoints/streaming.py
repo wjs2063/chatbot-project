@@ -34,12 +34,10 @@ async def video_download(video_id: str):
 @router.get("/{video_id}", summary="비디오 스트리밍")
 async def streaming(video_id: str, range: str = Header()):
     try:
-        file_list = os.listdir(f"/code/backend/server/{video_id}")
+        file_list = os.listdir(f"/code/backend/server/free-videos/{video_id}")
         file_list = [file for file in file_list if file.endswith(".mp4")]
-        print(file_list)
-        video_file_path = Path(f"/code/backend/server/{video_id}/{file_list[0]}")
+        video_file_path = Path(f"/code/backend/server/free-videos/{video_id}/{file_list[0]}")
         media_type = mimetypes.guess_type(video_file_path)[0]
-        print(media_type)
     except Exception as e:
         return {"msg": "파일 다운로드 요청을 해주세요"}
     file_byte_size = video_file_path.stat().st_size

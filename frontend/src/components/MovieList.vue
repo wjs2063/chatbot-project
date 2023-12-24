@@ -13,6 +13,7 @@
 
 <script>
 import axios from "axios";
+import {STREAMING_URL} from "@/constant/constant";
 
 export default {
   data() {
@@ -22,7 +23,7 @@ export default {
   },
   mounted() {
     // 서버에서 영화 목록을 받아오는 API 요청
-    axios.get('http://localhost:50000/api/v1/streaming/movie-list?page=0') // 서버의 실제 URL로 변경
+    axios.get(STREAMING_URL + '/movie-list?page=0') // 서버의 실제 URL로 변경
         .then(response => {
           this.movies = response.data;
           console.log(this.movies);

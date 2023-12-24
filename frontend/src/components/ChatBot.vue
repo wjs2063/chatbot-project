@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import axios from "axios";
 import BounceLoader from "@/components/BounceLoader.vue";
+import {LLM_URL} from "@/constant/constant";
 
 let message_datas = ref([]);
 let user_message = ref('')
@@ -17,7 +18,7 @@ const get_message = async () => {
     "messages": msg
   }
   try {
-    let res = await axios.post('http://www.codeplanet.site:9999/api/v1/items/chat',
+    let res = await axios.post( LLM_URL + '/chat',
         JSON.parse(JSON.stringify(body))
     )
     chatbot_message.value = res.data["result"]

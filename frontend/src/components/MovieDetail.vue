@@ -3,7 +3,7 @@
     <h2>{{ videoName }}</h2>
   </div>
     <div>
-      <video width="1200" controls>
+      <video width="500" controls>
         <source :src="get_streaming_url()" type="video/mp4">
       </video>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
 // import axios from 'axios';
-
+import {STREAMING_URL} from "@/constant/constant";
 
 export default {
   data() {
@@ -35,8 +35,7 @@ export default {
     //       });
     // },
     get_streaming_url() {
-      console.log('http://localhost:50000/api/v1/streaming/' + this.videoName)
-      return 'http://localhost:50000/api/v1/streaming/' + this.videoName;
+      return STREAMING_URL+ "/" + this.videoName;
     }
   },
   mounted() {

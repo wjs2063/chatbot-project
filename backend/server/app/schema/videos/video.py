@@ -24,11 +24,11 @@ class VideoSchema(BasicVideoSchema):
 
     @field_validator('name',mode='before')
     @classmethod
-    def check_nameform(cls, v: str):
+    def check_name(cls, v: str):
         # 대문자 및 특수문자 존재여부
         if isinstance(v, str):
-            if len(v) < 5:
-                raise ValueError('아이디 길이는 5자이상만 가능합니다.')
+            if len(v) < 1:
+                raise ValueError('영화 이름은 공백이 불가능합니다.')
         return v
 
     class Config(BaseConfig):
@@ -42,19 +42,3 @@ class VideoSchema(BasicVideoSchema):
             ]
         }
 
-# class UserSchema(BaseUser):
-#     password: Optional[str]
-#
-#
-#     class Config(BaseConfig):
-#         from_attributes = True
-#         json_schema_extra = {
-#             "examples": [
-#                 {
-#                     "name": "foobar",
-#                     "login_id" : "aaa1234",
-#                     "password" : "12345678"
-#
-#                 }
-#             ]
-#         }
