@@ -65,7 +65,8 @@
 
 
 ### Architecture 
-![image](https://github.com/wjs2063/chatbot-project/assets/76778082/53e78a85-32e6-44f7-aa4a-83ce4663bd59)
+<img width="700" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/12fddb4c-30e5-4218-85d0-e68820970eb0">
+
 
 
 
