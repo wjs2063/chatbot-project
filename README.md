@@ -1,5 +1,40 @@
 # chatbot-project
 
+
+### Architecture 
+<img width="700" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/12fddb4c-30e5-4218-85d0-e68820970eb0">
+
+#### Backend(WAS)
+- Infra : Docker
+- Language : Python
+- framework : FastAPI
+- DB : postgresql,redis
+
+#### API Gateway + ReverseProxy (Nginx)
+- Nginx ( frontend 정적파일 제공)
+- Nginx as a gateway server (upstream Routing)
+- 처리율 제한장치 by rate limit (ip 기반적용 예정)
+- SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. (Kubernetes 를 이용한 자동 scale out,이후 적용 예정)
+
+#### Frontend
+
+- Infra : Docker
+- Language : Javascript
+- framework : Vuejs3
+
+#### Auth 
+1. access_token & refresh_token 
+
+#### Streaming 
+1. Movie Streaming 
+
+### AI 
+- WIT.AI : meta 에서 공개한 문장 의도 분석기, 대답을 빨리줄수있는 문장의 intent 에 대해서는 redis 에 캐싱하여 사용자에게 빠른 응답을 제공한다.
+- GPT : LLM 모델
+
+
+
+
 - Backend : Fastapi
   - 선정이유 : default 비동기 지원 및 해당 프로젝트는 데부분 File I/O 및 Network I/O 이므로 파이썬도 충분한 성능을 낼수있다고판단, 그리고 빠른 개발속도 
 - frontend : Vuejs3, node-js : v18.18.2, @vue/cli 5.0.8
@@ -28,49 +63,21 @@
 - video_summarization := 바빠서 영상을 차마 다 보지못하거나, 기상청 예보같은(5~6분) 결론만필요한 영상들에대해 빠르게 요약결과를 내어줄수있다. (이미 요청한 동영상 요약결과는 0.3초만에 받아볼수있음)
 - https://www.youtube.com/watch?v=fb8FalIe0Ig (15분) X-process_time = 95초
 - https://www.youtube.com/watch?v=IEEgpggMKBs (6분 %6초) X-process_time = 57초
-- ![image](https://github.com/wjs2063/chatbot-project/assets/76778082/55777adb-0beb-4cff-931c-7d5df942c8d3)
+- <img width="300" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/55777adb-0beb-4cff-931c-7d5df942c8d3">
 
 
 
 ### Chatbot 기대효과
 사용자의 질문에 맞는 응답제공
 
-![스크린샷 2023-10-19 234936](https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9)   
-
-
-
-### Backend
-- Infra : Docker
-- Language : Python
-- framework : FastAPI
-- DB : postgresql,redis
-
-### API Gateway + ReverseProxy (Nginx)
-- Nginx
-- Nginx ( frontend 정적파일 제공)
-- Nginx as a gateway server ( Routing)
-- Nginx location을 통해  해당 API용도에맞는 뒷단의 서버로 요청
-- SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. (Kubernetes 를 이용한 자동 scale out) 
-
-### Frontend
-
-- Infra : Docker
-- Language : Javascript
-- framework : Vuejs3
-
-
-### AI 
-- WIT.AI : meta 에서 공개한 문장 의도 분석기, 대답을 빨리줄수있는 문장의 intent 에 대해서는 redis 에 캐싱하여 사용자에게 빠른 응답을 제공한다.
-- GPT : LLM 모델
-
-
-### Architecture 
-<img width="700" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/12fddb4c-30e5-4218-85d0-e68820970eb0">
+<img width="300" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/8b39e331-ca95-4155-87d7-36568354f3f9">
 
 
 
 
-### chatbot 실행 로직 
+
+
+### llms-chatbot 실행 로직 
 
 1. Client 발화 요청
 2. Wit.ai 에서 해당발화 특징 추출 응답
