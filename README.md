@@ -1,14 +1,17 @@
 # chatbot-project
 
 
+
+
 ### Architecture 
 <img width="700" alt="image" src="https://github.com/wjs2063/chatbot-project/assets/76778082/12fddb4c-30e5-4218-85d0-e68820970eb0">
 
 #### Backend(WAS)
 - Infra : Docker
 - Language : Python
-- framework : FastAPI
+- framework : FastAPI, ffmpeg
 - DB : postgresql,redis
+
 
 #### API Gateway + ReverseProxy (Nginx)
 - Nginx ( frontend 정적파일 제공)
@@ -21,6 +24,8 @@
 - Infra : Docker
 - Language : Javascript
 - framework : Vuejs3
+
+
 
 #### Auth 
 1. access_token & refresh_token 
