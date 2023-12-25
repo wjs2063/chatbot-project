@@ -153,8 +153,8 @@ uvicorn main:app --host=0.0.0.0
 
 or
 
-gunicorn -w 4 --bind unix:/tmp/myapi.sock main:app --
-worker-class uvicorn.workers.UvicornWorker
+gunicorn -w 4 -b 0.0.0.0:8000 --bind unix:/tmp/myapi.
+sock main:app --worker-class uvicorn.workers.UvicornWorker
 ```
 
 필요시 
