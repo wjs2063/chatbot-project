@@ -93,9 +93,9 @@
 
 ### 비디오 출처 (공유마당)
 - convert wmv to mp4
-
+- ffmpeg 사용 
 ```
-convert script.sh
+convert_script.sh
 ``` 
 
 
