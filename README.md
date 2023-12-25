@@ -150,6 +150,11 @@ python -m pip install -r requirements.txt
 cd /server/app
 
 uvicorn main:app --host=0.0.0.0
+
+or
+
+gunicorn -w 4 --bind unix:/tmp/myapi.sock main:app --
+worker-class uvicorn.workers.UvicornWorker
 ```
 
 필요시 
