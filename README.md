@@ -173,5 +173,5 @@ sock main:app --worker-class uvicorn.workers.UvicornWorker
 필요시 
 
 ```
-apk add gcc g++ linux-headers
+apk add gcc g++ linux-headers libffi-dev
 ```
