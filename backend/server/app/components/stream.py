@@ -4,19 +4,19 @@ from meta.common import SingletonMeta
 import os
 from pytube import YouTube
 from ArtificalIntelligence.constant import yt_baseurl
-from core.constant import audio_base_path
+from core.constant import  AUDIO_BASE_PATH
 
 
-def stream_file(start, end,video_file_path):
+async def stream_file(start, end,video_file_path):
     with open(video_file_path, mode="rb") as file_bytes:
         file_bytes.seek(start)
         stream_chunk = file_bytes.read(end - start)
         yield stream_chunk
 
-class DownloadHandler(metaclass=SingletonMeta):
+
+class DownloadService:
     def __init__(self):
-        self.base_path = audio_base_path
-        pass
+        self.base_path = AUDIO_BASE_PATH
 
     async def download(self,video_id):
         dir_path = f"{self.base_path}/{video_id}/"
@@ -28,5 +28,3 @@ class DownloadHandler(metaclass=SingletonMeta):
         video = yt.streams.filter(file_extension='mp4').first()
         await asyncio.to_thread(video.download,dir_path)
         return 1
-
-download_handler = DownloadHandler()

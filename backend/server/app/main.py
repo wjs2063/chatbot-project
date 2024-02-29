@@ -19,10 +19,13 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 origins = [
     "http://localhost:3000",
     # "http://172.30.1.50:3000",
-    'http://localhost:50001',
+    "http://localhost:50000"
+    'http://localhost:50001/',
+    "http://localhost:9999/"
     "http://www.codeplanet.site",
     "http://www.codeplanet.site:50001",
     "http://www.codeplanet.site:9999"
+    "http://172.30.1.51:50000"
 ]
 
 app.add_middleware(

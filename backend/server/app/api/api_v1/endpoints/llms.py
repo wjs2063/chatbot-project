@@ -1,19 +1,16 @@
 from typing import *
 from fastapi import APIRouter, Depends, Request
-from sqlalchemy.orm import Session
 from db.session import *
-from crud import crud_item
+
 from core.config import settings
-import sys
+
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi.encoders import jsonable_encoder
-from schema.items.item import ItemBase, ItemScheme
+
 from schema.common import ChatMessage
 from core.log_config import base_logger
-import os
+
 from crud.crud_item import *
-import requests
-import openai
+
 from openai import AsyncOpenAI
 import re
 from ArtificalIntelligence.witAI import WitAI, witai, WitResponse
@@ -22,9 +19,7 @@ from ArtificalIntelligence.summarize import get_summarize_object
 router = APIRouter()
 
 
-
-
-@router.post('/chat', summary = "GPT 채팅")
+@router.post('/chat', summary="GPT 채팅")
 async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSession = Depends(get_db),
                       redis=Depends(get_redis)):
     # get response from witai
@@ -67,9 +62,9 @@ async def get_message(request: Request, chatmessage: ChatMessage, db: AsyncSessi
         print(e)
         return {"result": "retry next time"}
 
-import json
-@router.post("/summarize-video", summary = "비디오 요약")
-async def get_summarize(request : Request, video_id : str,summarize_handler = Depends(get_summarize_object) ):
-    response = await summarize_handler.get_summarize(video_id=video_id)
-    base_logger.info(response)
-    return response
+
+# @router.post("/summarize-video", summary="비디오 요약")
+# async def get_summarize(request: Request, video_id: str, summarize_handler=Depends(get_summarize_object)):
+#     response = await summarize_handler.get_summarize(video_id=video_id)
+#     base_logger.info(response)
+#     return response

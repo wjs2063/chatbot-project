@@ -1,14 +1,14 @@
 <script setup>
 import axios from "axios";
 import {ref} from "vue";
-import {LLM_URL} from "@/constant/constant";
+import {SUMMARIZE_URL} from "@/constant/constant";
 
 const videoId = ref('')
 let res = ref('')
 let summary = ref('')
 const get_summarize = async () => {
     try {
-        let response = await axios.post(LLM_URL + '/summarize-video', {}, {
+        let response = await axios.post(SUMMARIZE_URL + '/summarize-video', {}, {
                 params: {
                     "video_id": videoId.value
                 },

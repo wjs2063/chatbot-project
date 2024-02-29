@@ -10,7 +10,7 @@ from typing import Optional, List, Dict
 from core.config import settings
 import os
 import aiofiles as aiof
-from core.constant import audio_base_path
+from core.constant import AUDIO_BASE_PATH
 from ArtificalIntelligence.constant import yt_baseurl
 from core.log_config import base_logger
 from meta.common import SingletonMeta
@@ -36,7 +36,7 @@ class AudioHandler(metaclass=SingletonMeta):
         pass
 
     async def download_youtube_audio_file(self, video_id: str) -> None:
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
         # 파일존재하면 종료
         if os.path.isfile(audio_file_path): return
@@ -52,7 +52,7 @@ class AudioHandler(metaclass=SingletonMeta):
                 os.remove(os.path.dirname(dir_path))
 
     async def save_text_to_file(self, transcript: str, video_id: str) -> None:
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         text_file_path = dir_path + f"{video_id}.txt"
         if is_file_exists(path=text_file_path): return
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
@@ -72,7 +72,7 @@ class STTHandler(GPT_BASE, metaclass=SingletonMeta):
         super().__init__()
 
     async def audio_to_text(self, video_id: str) -> Optional[str]:
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         audio_file_path = dir_path + f"{video_id}.mp4"
         stt_file_path = dir_path + f"{video_id}.txt"
         if is_file_exists(stt_file_path):
@@ -103,7 +103,7 @@ class STTHandler(GPT_BASE, metaclass=SingletonMeta):
         return transcript
 
     async def save_summarize_text_to_file(self, transcript, video_id):
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         summarize_file_path = dir_path + f"{video_id}_summarize.txt"
         if os.path.isfile(path=summarize_file_path): return
         os.makedirs(os.path.dirname(dir_path), exist_ok=True)
@@ -120,7 +120,7 @@ class ChatGPT(GPT_BASE, metaclass=SingletonMeta):
 
     async def get_summarize_text_from_gpt(self, transcript, video_id) -> str:
         if transcript is None: return
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         summarize_file_path = dir_path + f"{video_id}_summarize.txt"
         try:
             if os.path.isfile(path=summarize_file_path):
@@ -162,7 +162,7 @@ class SummarizeHandler(metaclass=SingletonMeta):
     async def get_summarize(self, video_id: str):
         content = ''
         # summarize_file 이 이전에 존재하면 그대로 return
-        dir_path = f"{audio_base_path}/{video_id}/"
+        dir_path = f"{AUDIO_BASE_PATH}/{video_id}/"
         summarize_file_path = dir_path + f"{video_id}_summarize.txt"
         if os.path.isfile(path=summarize_file_path):
             async with aiof.open(summarize_file_path, "r") as fd:
