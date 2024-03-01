@@ -54,6 +54,9 @@
 - video_streaming 빨리감기 되감기 기능추가(2023-12-21)
 - Auth 기능 미완성 
 
+### 코드 
+python 의존성 주입 라이브러리를 활용
+
 ### Video Streaming 
  ~~youtube video_id 를 가지고 준비요청을 보내면 서버에서 다운로드후 영상 스트리밍~~
 
@@ -112,8 +115,6 @@ Project 구성 비용 :
 - 실사용시 비용이 늘어날수있음.( 서버 + GPT API 비용)
 
 
-### 코드 
-python 의존성 주입 라이브러리를 활용
  
 
 ### USAGE 
