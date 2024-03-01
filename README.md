@@ -150,28 +150,12 @@ dist 파일 Nginx 컨테이너의 /code에 두기
 #### backend
 
 ```
+docker-compose build --no-cache
 docker compose up -d
 ```
 
-in docker container  
 
-```
-cd /code
-
-python -m pip install -r requirements.txt
-
-cd /server/app
-
-uvicorn main:app --host=0.0.0.0
-
-or
-
-gunicorn -w 4 -b 0.0.0.0:8000 --bind unix:/tmp/myapi.
-sock main:app --worker-class uvicorn.workers.UvicornWorker
-```
-
-필요시 
-
+필요시 (DockerContainer 구동시 자동으로 되어있음)
 ```
 apk add gcc g++ linux-headers libffi-dev
 ```
