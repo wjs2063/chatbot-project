@@ -3,10 +3,13 @@ version : "3.8"
 services:
   fapi :
     image : "python:3.11.5-alpine"
+    build :
+      context : .
+      dockerfile: fapiDockerFile/Dockerfile
+#    volumes:
+#      - $PWD:/code
     ports :
       - "50000:8000"
-    volumes :
-      - $PWD:/code
     tty : true
   db:
     image: postgres:11.22-alpine3.18
