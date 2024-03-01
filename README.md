@@ -52,6 +52,7 @@
 - video_summarization 기능 추가 (2023-11-14)
 - video_streaming 기능 추가 (2023-12-07)
 - video_streaming 빨리감기 되감기 기능추가(2023-12-21)
+- Auth 기능 미완성 
 
 ### Video Streaming 
  ~~youtube video_id 를 가지고 준비요청을 보내면 서버에서 다운로드후 영상 스트리밍~~
