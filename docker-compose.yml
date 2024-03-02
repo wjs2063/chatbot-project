@@ -12,7 +12,7 @@ services:
       - "50000:8000"
     tty : true
   db:
-    image: postgres:11.22-alpine3.18
+    image: postgres:15.5-alpine3.18
     restart: always
     ports :
       - "8080:5432"
