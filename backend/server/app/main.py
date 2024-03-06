@@ -13,12 +13,7 @@ from db.base import Base
 from fastapi.middleware.cors import CORSMiddleware
 from core.log_config import base_logger
 
-app = FastAPI(title="ChatBot",
-              description="API_DESC",
-              version="0.2.0",
-              docs_url='/openapi/docs',
-              redoc_url='/openapi/redoc',
-              openapi_url='/openapi/openapi.json')
+app = FastAPI()
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 origins = [

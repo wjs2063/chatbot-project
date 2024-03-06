@@ -9,8 +9,9 @@ WORKDIR /code/backend/server
 RUN apk add vim gcc g++ linux-headers libffi-dev
 #
 RUN pip install --upgrade pip
+RUN pip install gunicorn
 RUN pip install  -r requirements.txt
 
-WORKDIR /code/backend/server/app
-
-ENTRYPOINT ["uvicorn", "main:app","--host","0.0.0.0","--port","8000"]
+WORKDIR /code
+#gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:80
+ENTRYPOINT ["gunicorn","-c","gunicorn_conf.py"]
