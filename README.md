@@ -17,7 +17,7 @@
 - Nginx ( frontend 정적파일 제공)
 - Nginx as a gateway server (upstream Routing)
 - 처리율 제한장치 by rate limit (ip 기반적용 예정)
-- SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. (Kubernetes 를 이용한 자동 scale out,이후 적용 예정)
+- SPOF(Singloe Point Of Fail) 문제가 발생할수있다.( Gateway 서버가 모든부하를 받으니 이부분은 Scale out 기법을 통해 해결하도록한다. 
 
 #### Frontend
 
